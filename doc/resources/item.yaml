@@ -1,0 +1,45 @@
+ItemPath:
+  get:
+    tags:
+      - Item
+    summary: Get all Users
+    security:
+      - BearerAuth: []
+    responses:
+      '200':
+        $ref: '../responses/success_response.yaml'
+  post:
+    tags:
+      - Item
+    summary: Создание нового элемента
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/item_schema.yaml'
+          example:
+            name: 'Item'
+            phone: '9801121345'
+            key: 'key'
+            created_at: '2022-04-23 22:10:10'
+            updated_at: '2022-04-23 22:10:10'
+    responses:
+      '200':
+        $ref: '../responses/success_response.yaml'
+UserPathWithID:
+  get:
+    tags:
+      - Item
+    summary: Get User by ID
+#    security:
+#      - BearerAuth: []
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          example: "1"
+    responses:
+      '200':
+        $ref : "../responses/success_response.yaml"
