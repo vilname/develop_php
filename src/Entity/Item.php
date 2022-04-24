@@ -1,40 +1,90 @@
 <?php
+
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping AS ORM;
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Table(name="item")
  * @ORM\Entity
  */
-class Item
+class Item implements \JsonSerializable
 {
     /**
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private int $id;
 
-    /**
-     * @ORM\Column(type="string")
-     * @Assert\NotBlank()
-     */
-    private $name;
+    /**  @ORM\Column(type="string") */
+    private string $name;
 
     /** @ORM\Column(type="string") */
-    private $phone;
+    private string $phone;
 
-    /** @ORM\Column(type="string") */
-    private $key;
+    /** @ORM\Column(name="`key`", type="string") */
+    private string $key;
 
     /** @ORM\Column(type="datetime", name="created_at") */
-    private $createdAt;
+    private DateTime $createdAt;
 
     /** @ORM\Column(type="datetime", name="updated_at") */
-    private $updatedAt;
+    private DateTime $updatedAt;
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param string $phone
+     */
+    public function setPhone(string $phone): void
+    {
+        $this->phone = $phone;
+    }
+
+    /**
+     * @param string $key
+     */
+    public function setKey(string $key): void
+    {
+        $this->key = $key;
+    }
+
+    /**
+     * @param DateTime $createdAt
+     * @throws \Exception
+     */
+    public function setCreatedAt(DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * @param DateTime $updatedAt
+     * @throws \Exception
+     */
+    public function setUpdatedAt(DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
@@ -61,17 +111,23 @@ class Item
                 'message' => 'Поле должно быть строкой',
             ])
         ]);
-        $metadata->addPropertyConstraints('created_at', [
-            new Assert\Type([
-                'type' => 'string',
-                'message' => 'Поле должно быть строкой',
+        $metadata->addPropertyConstraint('createdAt', new Assert\DateTime());
+        $metadata->addPropertyConstraints('updatedAt', [
+            new Assert\DateTime([
+                'message' => 'Поле должно быть датой',
             ])
         ]);
-        $metadata->addPropertyConstraints('updated_at', [
-            new Assert\Type([
-                'type' => 'string',
-                'message' => 'Поле должно быть строкой',
-            ])
-        ]);
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'key' => $this->key,
+            'phone' => $this->phone,
+            'createdAt' => $this->createdAt->format("Y-m-d H:i:s"),
+            'updatedAt' => $this->createdAt->format("Y-m-d H:i:s")
+        ];
     }
 }

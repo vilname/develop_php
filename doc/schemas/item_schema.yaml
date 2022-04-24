@@ -8,11 +8,16 @@ properties:
     format: int
   name:
     type: string
+    example: 'Item'
   phone:
     type: string
+    example: '9801121345'
   key:
     type: string
+    example: 'key'
   created_at:
     type: string
+    example: '2022-04-23 22:10:10'
   updated_at:
     type: string
+    example: '2022-04-23 22:10:10'

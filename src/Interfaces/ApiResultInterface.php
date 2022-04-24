@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface ApiResultInterface
 {
-    public function execute(DtoInterface $dto);
+    public function execute(array $itemsEntityDto);
 }

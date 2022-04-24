@@ -14,7 +14,7 @@ $isDevMode = false;
 // the connection configuration
 $dbParams = array(
     'driver'   => 'pdo_mysql',
-    'host' => 'mysql',
+    'host'     => 'mysql',
     'user'     => 'root',
     'password' => 'root',
     'dbname'   => 'developtime',
@@ -29,9 +29,3 @@ AnnotationRegistry::registerLoader('class_exists');
 $config->setMetadataDriverImpl($driver);
 
 $entityManager = EntityManager::create($dbParams, $config);
-
-//$user = $entityManager->find('App\Entity\Item', 1);
-//
-//echo '<pre>';
-//print_r($user);
-//echo '</pre>';

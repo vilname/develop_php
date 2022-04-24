@@ -2,7 +2,9 @@
 
 namespace App\Resources;
 
-class SuccessResource
+use Laminas\Diactoros\Response\JsonResponse;
+
+class SuccessResource extends JsonResponse
 {
 
 }

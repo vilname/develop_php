@@ -9,13 +9,17 @@ tags:
 paths:
   /item:
     $ref: './resources/item.yaml#/ItemPath'
-  /user/{id}:
+  /item/{id}:
     $ref: './resources/item.yaml#/UserPathWithID'
+  /user:
+    $ref: './resources/user.yaml#/UserPath'
 
 components:
   schemas:
     Item:
       $ref: './schemas/item_schema.yaml'
-#  securitySchemes:
-#    BearerAuth:
-#      $ref: './schemas/security_schema.yaml'
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+

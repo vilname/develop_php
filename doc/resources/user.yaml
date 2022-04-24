@@ -1,0 +1,22 @@
+UserPath:
+  get:
+    tags:
+      - User
+    summary: Получение токена пользователя
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    token:
+                      type: string
+                      description: Токен пользователя
+                status_code:
+                  type: string
+                  example: 'success'

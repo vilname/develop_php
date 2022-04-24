@@ -8,9 +8,11 @@ class ItemDto implements DtoInterface
 {
     public ?string $name;
     public ?string $phone;
-    public ?string $key;
+    public string $key;
     public ?string $createdAt;
     public ?string $updatedAt;
+
+    public static array $items;
 
     public static function map(array $data): self
     {
@@ -23,5 +25,14 @@ class ItemDto implements DtoInterface
         $o->updatedAt = $data['updated_at'] ?? '';
 
         return $o;
+    }
+
+    public static function nestedMap(array $data): array
+    {
+        foreach ($data as $field) {
+            self::$items[] = self::map($field);
+        }
+
+        return self::$items;
     }
 }

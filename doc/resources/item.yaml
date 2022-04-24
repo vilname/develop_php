@@ -2,37 +2,73 @@ ItemPath:
   get:
     tags:
       - Item
-    summary: Get all Users
+    summary: Возвращает все элементы
     security:
-      - BearerAuth: []
+      - bearerAuth: []
     responses:
       '200':
-        $ref: '../responses/success_response.yaml'
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        description: Токен пользователя
+                        example: 1
+                      name:
+                        type: string
+                        description: Имя
+                        example: 'item'
+                      key:
+                        type: string
+                        description: Ключ
+                        example: 'key'
+                      phone:
+                        type: string
+                        description: Телефон
+                        example: '8984737265113'
+                      created_at:
+                        type: string
+                        description: Дата создания
+                        example: '2022-10-02'
+                      updated_at:
+                        type: string
+                        description: Дата изменения
+                        example: '2022-10-02'
+                status_code:
+                  type: string
+                  example: 'success'
   post:
     tags:
       - Item
     summary: Создание нового элемента
+    security:
+      - bearerAuth: [ ]
     requestBody:
       content:
         application/json:
           schema:
-            $ref: '../schemas/item_schema.yaml'
-          example:
-            name: 'Item'
-            phone: '9801121345'
-            key: 'key'
-            created_at: '2022-04-23 22:10:10'
-            updated_at: '2022-04-23 22:10:10'
+            type: array
+            items:
+              $ref: '../schemas/item_schema.yaml'
     responses:
       '200':
-        $ref: '../responses/success_response.yaml'
+        $ref: "../responses/success_response.yaml"
+
 UserPathWithID:
-  get:
+  put:
     tags:
       - Item
-    summary: Get User by ID
-#    security:
-#      - BearerAuth: []
+    summary: Изменение элемента
+    security:
+      - bearerAuth: []
     parameters:
       - in: path
         name: id
@@ -40,6 +76,37 @@ UserPathWithID:
         schema:
           type: string
           example: "1"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/item_schema.yaml'
     responses:
       '200':
         $ref : "../responses/success_response.yaml"
+
+  delete:
+    tags:
+      - Item
+    summary: Изменение элемента
+    security:
+      - bearerAuth: [ ]
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+          example: "1"
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/item_schema.yaml'
+    responses:
+      '200':
+        $ref: "../responses/success_response.yaml"
