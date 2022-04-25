@@ -7,7 +7,6 @@ use App\Interfaces\DtoInterface;
 use App\Models\Items\Dto\ItemDto;
 use App\Models\Items\ItemRepository;
 use App\Models\Items\ItemService;
-use App\Models\Users\AuthService;
 use App\Resources\ErrorResource;
 use App\Resources\SuccessResource;
 use Laminas\Diactoros\Response\JsonResponse;

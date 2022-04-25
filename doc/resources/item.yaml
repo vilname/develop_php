@@ -80,9 +80,8 @@ UserPathWithID:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '../schemas/item_schema.yaml'
+            type: object
+            $ref: '../schemas/item_schema.yaml'
     responses:
       '200':
         $ref : "../responses/success_response.yaml"
@@ -90,7 +89,7 @@ UserPathWithID:
   delete:
     tags:
       - Item
-    summary: Изменение элемента
+    summary: Удаление элемента
     security:
       - bearerAuth: [ ]
     parameters:
@@ -104,9 +103,7 @@ UserPathWithID:
       content:
         application/json:
           schema:
-            type: array
-            items:
-              $ref: '../schemas/item_schema.yaml'
+            $ref: '../schemas/item_schema.yaml'
     responses:
       '200':
         $ref: "../responses/success_response.yaml"

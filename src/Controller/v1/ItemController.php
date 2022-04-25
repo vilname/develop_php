@@ -3,6 +3,7 @@
 namespace App\Controller\v1;
 
 use App\Models\Items\Action\CreateAction;
+use App\Models\Items\Action\DeleteAction;
 use App\Models\Items\Action\ReadAction;
 use App\Models\Items\Action\UpdateAction;
 use App\Models\Items\Dto\ItemDto;
@@ -73,7 +74,7 @@ class ItemController
             ]);
         }
 
-        $action = new UpdateAction();
-        return $action->execute(ItemDto::map(json_decode($request->getBody()->getContents(), true)), $id);
+        $action = new DeleteAction();
+        return $action->execute($id);
     }
 }
